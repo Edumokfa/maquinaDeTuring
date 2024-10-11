@@ -1,7 +1,8 @@
+
 let tape = ['●', 'a', 'a', 'b', 'b', 'c', 'c', 'β', 'β'];
 let head = 0;
-let state = 'q0'; // Estado inicial
-let acceptingState = 'q6'; // Estado de aceitação
+let state = 'q0';
+let acceptingState = 'q6';
 
 function renderTape() {
     const tapeContainer = document.getElementById('tape');
@@ -49,7 +50,35 @@ const transitions = {
     },
 };
 
+function clearTableHighlight() {
+    const tableCells = document.querySelectorAll('#transition-table td');
+    tableCells.forEach(cell => {
+        cell.classList.remove('highlight');
+    });
+}
+
+function highlightTransition(state, symbol) {
+    const rows = document.querySelectorAll('#transition-table tbody tr');
+    
+    rows.forEach(row => {
+        const stateCell = row.querySelector('td:first-child');
+        if (stateCell && stateCell.textContent.includes(state)) {
+            const columns = row.querySelectorAll('td');
+            const symbolIndex = { '●': 1, 'a': 2, 'b': 3, 'c': 4, 'A': 5, 'B': 6, 'C': 7, 'β': 8 };
+            
+            if (symbolIndex[symbol] != null) {
+                const cellToHighlight = columns[symbolIndex[symbol]];
+                if (cellToHighlight) {
+                    cellToHighlight.classList.add('highlight');
+                }
+            }
+        }
+    });
+}
+
 function step() {
+    clearTableHighlight(); 
+
     let symbol = tape[head];
     let [nextState, writeSymbol, direction] = transitions[state][symbol] || [null, null, null];
     
@@ -57,6 +86,8 @@ function step() {
         document.getElementById('result').textContent = 'Erro: Transição inválida!';
         return;
     }
+
+    highlightTransition(state, symbol);
 
     tape[head] = writeSymbol;
     state = nextState;
