@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Máquina de Turing</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Máquina de Turing - Linguagem Triplo Balanceamento</h1>
+        <div id="tape-container">
+            <div id="tape"></div>
+        </div>
+        <button onclick="startTuringMachine()">Iniciar</button>
+        <div id="result"></div>
+
+        <table id="transition-table">
+            <thead>
+                <tr>
+                    <th>δ</th>
+                    <th>●</th>
+                    <th>a</th>
+                    <th>b</th>
+                    <th>c</th>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>C</th>
+                    <th>β</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>→q0</td>
+                    <td>(q1, ●, D)</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>q1</td>
+                    <td>-</td>
+                    <td>(q2, A, D)</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>(q5, B, D)</td>
+                    <td>-</td>
+                    <td>(q6, β, D)</td>
+                </tr>
+                <tr>
+                    <td>q2</td>
+                    <td>-</td>
+                    <td>(q2, a, D)</td>
+                    <td>(q3, B, D)</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>(q2, B, D)</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>q3</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>(q3, b, D)</td>
+                    <td>(q4, C, E)</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>(q3, C, D)</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>q4</td>
+                    <td>-</td>
+                    <td>(q4, a, E)</td>
+                    <td>(q4, b, E)</td>
+                    <td>-</td>
+                    <td>(q1, A, D)</td>
+                    <td>(q4, B, E)</td>
+                    <td>(q4, C, E)</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>q5</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>(q5, B, D)</td>
+                    <td>(q5, C, D)</td>
+                    <td>(q6, β, E)</td>
+                </tr>
+                <tr>
+                    <td>*q6</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    
+    <script src="script.js"></script>
+</body>
+</html>
