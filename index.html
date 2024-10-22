@@ -9,10 +9,17 @@
 <body>
     <div class="container">
         <h1>Máquina de Turing - Linguagem Triplo Balanceamento</h1>
+        <h2>L = {a^n b^n c^n | n >= 1}</h2>
+        
+        <label for="input-sequence">Sequência de Entrada:</label>
+        <input type="text" id="input-sequence" placeholder="Ex: aabbcc">
+        <button onclick="setInputTape()">Definir Entrada</button>
+        
         <div id="tape-container">
             <div id="tape"></div>
         </div>
         <button onclick="startTuringMachine()">Iniciar</button>
+        <button onclick="step()">Proximo passo</button>
         <div id="result"></div>
 
         <table id="transition-table">

@@ -1,22 +1,22 @@
-
-let tape = ['●', 'a', 'a', 'b', 'b', 'c', 'c', 'β', 'β'];
+let tape = ['●', 'a', 'a', 'b', 'b', 'c', 'c', 'β'];
 let head = 0;
 let state = 'q0';
 let acceptingState = 'q6';
+let countIteractions = 0;
 
-function renderTape() {
-    const tapeContainer = document.getElementById('tape');
-    tapeContainer.innerHTML = '';
-    tape.forEach((symbol, index) => {
-        const cell = document.createElement('div');
-        cell.textContent = symbol;
-        if (index === head) {
-            cell.style.backgroundColor = 'yellow';
-        }
-        tapeContainer.appendChild(cell);
-    });
+function setInputTape() {
+    const input = document.getElementById('input-sequence').value;
+    countIteractions = 0;
+    if (input) {
+        tape = ['●', ...input.split(''), 'β'];  
+        head = 0; 
+        state = 'q0'; 
+        renderTape(); 
+        document.getElementById('result').textContent = '';
+    } else {
+        alert('Por favor, insira uma sequência de entrada.');
+    }
 }
-
 const transitions = {
     'q0': {
         '●': ['q1', '●', 'D'],
@@ -78,14 +78,16 @@ function highlightTransition(state, symbol) {
 
 function step() {
     clearTableHighlight(); 
-
+    
     let symbol = tape[head];
     let [nextState, writeSymbol, direction] = transitions[state][symbol] || [null, null, null];
     
     if (!nextState) {
-        document.getElementById('result').textContent = 'Erro: Transição inválida!';
-        return;
+        let errorIn = countIteractions + 1;
+        document.getElementById('result').textContent = 'Erro em '+ errorIn +' iterações!';
+        return false;
     }
+    countIteractions++;
 
     highlightTransition(state, symbol);
 
@@ -96,7 +98,7 @@ function step() {
     renderTape();
 
     if (state === acceptingState) {
-        document.getElementById('result').textContent = 'Aceito!';
+        document.getElementById('result').textContent = 'Aceito em ' + countIteractions + ' iterações!';
     }
 }
 
@@ -106,9 +108,24 @@ function startTuringMachine() {
         if (state === acceptingState) {
             clearInterval(interval);
         } else {
-            step();
+            if (!step()){
+                return;
+            }
         }
     }, 1000);
+}
+
+function renderTape() {
+    const tapeContainer = document.getElementById('tape');
+    tapeContainer.innerHTML = '';
+    tape.forEach((symbol, index) => {
+        const cell = document.createElement('div');
+        cell.textContent = symbol;
+        if (index === head) {
+            cell.style.backgroundColor = 'yellow';
+        }
+        tapeContainer.appendChild(cell);
+    });
 }
 
 renderTape();
