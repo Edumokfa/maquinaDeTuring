@@ -13,29 +13,80 @@ body {
     margin: 20px auto;
     width: 100%;
     overflow-x: auto;
+    padding: 10px 0;
 }
 
 #tape {
     display: inline-block;
-    padding: 10px;
-    background-color: #fff;
-    border: 2px solid #000;
-    font-size: 24px;
-    min-width: 600px;
+    padding: 5px;
+    background-color: #f9f9f9;
+    border: 2px solid #4CAF50;
+    border-radius: 8px;
+    min-width: 400px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 #tape div {
     display: inline-block;
-    padding: 10px;
+    padding: 12px;
     border-right: 1px solid #ddd;
-    width: 40px;
+    width: 50px;
     text-align: center;
+    font-size: 18px;
+    color: #333;
+    background-color: #ffffff;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#input-sequence{
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+#input-sequence:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+    background-color: #fff;
+}
+
+#input-sequence:hover {
+    border-color: #8BC34A;
+}
+
+#input-sequence::placeholder {
+    color: #aaa;
+    font-style: italic;
 }
 
 button {
+    background: linear-gradient(45deg, #4CAF50, #8BC34A);
+    border: none;
+    border-radius: 8px;
+    color: white;
     padding: 10px 20px;
-    font-size: 18px;
-    margin-top: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background: linear-gradient(45deg, #43A047, #7CB342);
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+button:active {
+    background: linear-gradient(45deg, #388E3C, #689F38);
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+    transform: translateY(0px);
 }
 
 #result {
@@ -45,17 +96,17 @@ button {
 }
 
 #transition-table {
-    width: 100%;
+    width: 50%;
     border-collapse: collapse;
     margin: 20px 0;
-    font-size: 18px;
+    font-size: 12px;
+    height: 330px;
     text-align: center;
 }
 
 #transition-table th,
 #transition-table td {
     border: 1px solid black;
-    padding: 8px;
 }
 
 #transition-table th {
@@ -74,4 +125,11 @@ button {
 
 .highlight {
     background-color: #90ee90 !important;
+}
+
+#steps-container{
+    width: 50%;
+    font-size: 12px;
+    margin-left: 20px;
+
 }
